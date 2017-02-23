@@ -2,9 +2,7 @@ class CustomersController < ApplicationController
 
 def show
   authenticate!
-  status 200
-  content_type :json
-  @customer.to_json
+  render status: 200, json: @customer.to_json
 end
 
 def sources
