@@ -16,13 +16,9 @@ class ChargesController < ApplicationController
       :description => "Example Charge"
     )
   rescue Stripe::StripeError => e
-    status 402
-    return "Error creating charge: #{e.message}"
+    render status: 402, json: {error: "Error creating charge: #{e.message}"}
   end
-
-  status 200
-  return "Charge successfully created"
-
+  render status: 200, json: {success: "Charge successfully created"}
   end
 
   def charge_card
@@ -38,11 +34,8 @@ class ChargesController < ApplicationController
       :description => "Example Charge"
     )
   rescue Stripe::StripeError => e
-    status 402
-    return "Error creating charge: #{e.message}"
+    render status: 402, json: {error: "Error creating charge: #{e.message}"}
   end
-
-  status 200
-  return "Charge successfully created"
+  render status: 200, json: {success: "Charge successfully created"}
   end
 end

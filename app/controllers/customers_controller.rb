@@ -12,11 +12,9 @@ def sources
   begin
     @customer.sources.create({:source => source})
   rescue Stripe::StripeError => e
-    status 402
-    return "Error adding token to customer: #{e.message}"
+    render status: 402, json: {error: "Error adding token to customer: #{e.message}"}
   end
-  status 200
-  return "Successfully added source."
+  render status: 200, json: {success: "Successfully added source."}
 end
 
 def default_source
@@ -28,11 +26,8 @@ def default_source
     @customer.default_source = source
     @customer.save
   rescue Stripe::StripeError => e
-    status 402
-    return "Error selecting default source: #{e.message}"
+    render status: 402, json: {error: "Error selecting default source: #{e.message}"}
   end
-
-  status 200
-  return "Successfully selected default source."
+  render status: 200, json: {success: "Successfully selected default source."}
 end
 end
