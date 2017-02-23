@@ -8,6 +8,12 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  post '/charge' => 'charges#create'
+  get '/customer' => 'customers#show'
+  post '/customer/sources' => 'customers#sources'
+  post '/customer/default_source' => 'customers#default_source'
+  post '/charge_card' => 'charges#charge_card'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
