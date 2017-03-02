@@ -15,19 +15,21 @@ class ApplicationController < ActionController::Base
     end
     session[:customer_id] = @customer.id
   end
-  elsif params[:customer_id].present?
-    customer_id = params[:customer_id]
-    session[:customer_id] = customer_id
-    begin
-      @customer = Stripe::Customer.retrieve(customer_id)
-    rescue Stripe::InvalidRequestError
-    end
-  elsif session.has_key?(:customer_id)
-    customer_id = session[:customer_id]
-    begin
-      @customer = Stripe::Customer.retrieve(customer_id)
-    rescue Stripe::InvalidRequestError
-    end
+#  elsif params[:customer_id].present?
+#    customer_id = params[:customer_id]
+#    session[:customer_id] = customer_id
+#    begin
+#      @customer = Stripe::Customer.retrieve(customer_id)
+#    rescue Stripe::InvalidRequestError
+#    end
+#  end
+#  elsif session.has_key?(:customer_id)
+#    customer_id = session[:customer_id]
+#    begin
+#      @customer = Stripe::Customer.retrieve(customer_id)
+#    rescue Stripe::InvalidRequestError
+#    end
+#  end
   @customer
-end
+# end
 end
