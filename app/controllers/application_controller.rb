@@ -7,7 +7,14 @@ class ApplicationController < ActionController::Base
   # This code simulates "loading the Stripe customer for your current session".
   # Your own logic will likely look very different.
   return @customer if @customer
-  if params[:customer_id].present?
+  if params[:createNewUser].present?
+    mobileAppCustomerID = params[:mobileAppCustomerID]
+    begin
+      @customer = Stripe::Customer.create(:description => mobileAppCustomerID)
+    rescue Stripe::InvalidRequestError
+    end
+    session[:customer_id] = @customer.id
+  elsif params[:customer_id].present?
     customer_id = params[:customer_id]
     session[:customer_id] = customer_id
     begin
@@ -20,13 +27,6 @@ class ApplicationController < ActionController::Base
       @customer = Stripe::Customer.retrieve(customer_id)
     rescue Stripe::InvalidRequestError
     end
-  else
-    begin
-      @customer = Stripe::Customer.create(:description => "iOS SDK example customer")
-    rescue Stripe::InvalidRequestError
-    end
-    session[:customer_id] = @customer.id
-  end
   @customer
 end
 end
