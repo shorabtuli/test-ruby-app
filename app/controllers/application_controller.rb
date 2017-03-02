@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   return @customer if @customer
   if params[:customer_id].present?
     begin
-      @customer = Stripe::Customer.retrieve(customer_id)
+      @customer = Stripe::Customer.retrieve(params[:customer_id])
     rescue Stripe::InvalidRequestError
     end
   elsif session.has_key?(:customer_id)
