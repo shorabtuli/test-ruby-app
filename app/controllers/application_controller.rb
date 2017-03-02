@@ -15,8 +15,9 @@ class ApplicationController < ActionController::Base
     rescue Stripe::InvalidRequestError
     end
   elsif params[:createNewUser].present?
+    mobileAppCustomerID = params[:mobileAppCustomerID]
     begin
-      @customer = Stripe::Customer.create(:description => "iOS SDK example customer2")
+      @customer = Stripe::Customer.create(:description => mobileAppCustomerID)
     rescue Stripe::InvalidRequestError
     end
     session[:customer_id] = @customer.id
