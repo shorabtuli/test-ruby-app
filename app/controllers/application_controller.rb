@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     rescue Stripe::InvalidRequestError
     end
     session[:customer_id] = @customer.id
-  end
+
 #  elsif params[:customer_id].present?
 #    customer_id = params[:customer_id]
 #    session[:customer_id] = customer_id
@@ -31,5 +31,5 @@ class ApplicationController < ActionController::Base
 #    end
 #  end
   @customer
-# end
+  end
 end
