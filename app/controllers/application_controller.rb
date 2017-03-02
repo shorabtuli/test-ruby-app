@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   return @customer if @customer
   if params[:customer_id].present?
     customer_id = params[:customer_id]
+    session[:customer_id] = customer_id
     begin
       @customer = Stripe::Customer.retrieve(customer_id)
     rescue Stripe::InvalidRequestError
