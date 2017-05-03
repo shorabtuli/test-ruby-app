@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
+  # Prevent CSRF attacks by raising an exception. asfasfasdf
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     end
   else
     begin
-      @customer = Stripe::Customer.create(:description => "iOS SDK example customer")
+      @customer = Stripe::Customer.create(:description => "iOS SDK example customer is being added")
     rescue Stripe::InvalidRequestError
     end
     session[:customer_id] = @customer.id
